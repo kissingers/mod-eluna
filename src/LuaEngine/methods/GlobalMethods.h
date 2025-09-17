@@ -105,7 +105,6 @@ namespace LuaGlobalFunctions
      * - for TrinityCore returns the realmID as it is in the conf file.
      * @return uint32 realm ID
      */
-
     int GetRealmID(lua_State* L)
     {
         Eluna::Push(L, sConfigMgr->GetOption<uint32>("RealmID", 1));
@@ -362,6 +361,12 @@ namespace LuaGlobalFunctions
         return 1;
     }
 
+    /**
+    * Returns the [ItemTemplate] for the specified item ID.  The ItemTemplate contains all static data about an item, such as name, quality, stats, required level, and more.
+    *
+    * @param uint32 itemID : the item entry ID from `item_template` to look up
+    * @return [ItemTemplate] itemTemplate
+    */
     int GetItemTemplate(lua_State* L)
     {
         uint32 entry = Eluna::CHECKVAL<uint32>(L, 1);
@@ -3453,15 +3458,14 @@ namespace LuaGlobalFunctions
     }
 
     /**
-     * Return the entrance position (x, y, z, o) of the specified dungeon map id
+     * Return the entrance position (x, y, z, o) of the specified dungeon map id.
      *
      * @param uint32 mapId
      *
-     * return uint32 pos_x
-     * return uint32 pos_y
-     * return uint32 pos_z
-     * return uint32 pos_o
-     * 
+     * @return uint32 pos_x
+     * @return uint32 pos_y
+     * @return uint32 pos_z
+     * @return uint32 pos_o
      */
     int GetMapEntrance(lua_State* L)
     {
@@ -3497,15 +3501,14 @@ namespace LuaGlobalFunctions
     }
   
     /**
-     * Returns the instance of the specified DBC (DatabaseClient) store.
+     * Returns an entry from the specified DBC (DatabaseClient) store.
      *
-     * This function retrieves the DBC store associated with the provided name 
-     * and pushes it onto the Lua stack.
+     * This function looks up an entry in a DBC file by name and ID, and pushes it onto the Lua stack.
      *
-     * @param const char* dbcName : The name of the DBC store to retrieve.
-     * @param uint32 id : The ID used to look up within the specified DBC store.
+     * @param string dbcName : The name of the DBC store (e.g., "ItemDisplayInfo")
+     * @param uint32 id : The ID used to look up within the specified DBC store
      *
-     * @return [DBCStore] store : The requested DBC store instance.
+     * @return [DBCStore] store : The requested DBC store instance
      */
     int LookupEntry(lua_State* L)
     {
