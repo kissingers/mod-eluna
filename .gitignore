@@ -46,3 +46,5 @@ local.properties
 .loadpath
 .project
 .cproject
+/.vs
+/out/build/x64-Debug
